@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StarGuide - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="night-sky">
+    <div class="container">
+        <h1>StarGuide</h1>
+        <p>Enter details to get your stargazing score!</p>
+        
+        {% if error %}
+            <div class="error-banner">
+                ⚠️ {{ error }}
+            </div>
+        {% endif %}
+
+        <form action="/results" method="POST">
+            <label>Select Date:</label>
+            <input type="date" name="date" required>
+
+            <label>Select Time:</label>
+            <select name="time">
+                <option value="20:00">8:00 PM</option>
+                <option value="22:00">10:00 PM</option>
+                <option value="00:00">12:00 AM</option>
+                <option value="02:00">2:00 AM</option>
+            </select>
+
+            <label>Choose Location:</label>
+            <input type="text" id="cityInput" name="location" list="citySuggestions" placeholder="Enter city" autocomplete="off">
+            <datalist id="citySuggestions"></datalist>
+            <div class="button-group">
+                <button type="submit" class="btn-primary">Get Stargazing Score</button>
+                <a href="/history" class="history-link">📂 View Past Searches</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        const cityInput = document.getElementById('cityInput');
+        const dataList = document.getElementById('citySuggestions');
+        const API_KEY = 'YOUR_OPENWEATHER_API_KEY'; // Replace with your actual key
+
+        cityInput.addEventListener('input', async () => {
+            const query = cityInput.value;
+            if (query.length < 3) return; // Wait until 3 letters are typed
+
+            try {
+                const API_KEY = '6d64e4417f8a0879f78a023ee799c1d7';
+                const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${API_KEY}`);
+                const cities = await response.json();
+
+                dataList.innerHTML = ''; // Clear old suggestions
+
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    // Show "London, GB" or "London, CA" so he can tell them apart!
+                    option.value = `${city.name}, ${city.state ? city.state + ', ' : ''}${city.country}`;
+                    dataList.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Autocomplete error:", error);
+            }
+        });
+    </script>
+    <div class="footer-credit">
+        <span>Powered by Jayden Lu</span>
+        <img src="/static/icon.jpg" alt="Jayden's Icon" class="footer-icon">
+    </div>
+</body>
+</html>

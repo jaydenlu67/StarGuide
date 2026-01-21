@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StarGuide - History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container history-container">
+        <h1>Search History</h1>
+        <p>Past Stargazing Logs</p>
+        
+        <div style="text-align: left; margin-top: 20px;">
+            {% for row in searches %}
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>{{ row['location'] }}</strong><br>
+                    <span style="font-size: 0.8rem; color: #ccc;">{{ row['search_date'] }}</span>
+                </div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: #4a90e2;">
+                    {{ row['score'] }}/10
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form action="/clear_history" method="POST" onsubmit="return confirm('Are you sure you want to wipe all history?');">
+            <button type="submit" style="background-color: #e74c3c; margin-bottom: 10px;">
+                🗑️ CLEAR ALL HISTORY
+            </button>
+        </form>
+        <a href="/home"><button>Back to Search</button></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* General page styling for the "Night Sky" feel */
+body {
+    background-image: url('background.jpg'); 
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #0b0d17;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Stacks everything vertically */
+    align-items: center;    /* Centers horizontally */
+    
+    /* CHANGE THESE: */
+    justify-content: flex-start; /* Start from the top instead of centering */
+    padding-top: 50px;           /* Adds space at the top so it's not touching the edge */
+    padding-bottom: 50px;        /* Adds space at the bottom for scrolling */
+    min-height: 100vh;           /* Ensures background covers at least full screen */
+}
+
+.container {
+    background-color: #1a1c2c; 
+    border: 2px solid #30344f;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px; /* Limits how wide it gets on desktop */
+    height: auto;     /* IMPORTANT: Let the box grow as long as it needs to */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    margin: 50px auto;   /* 50px space at top/bottom, 'auto' centers it horizontally */
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    font-size: 3rem; /* Adjust this number to go even bigger */
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+input, select {
+    width: 100%;             /* Fills the container width */
+    box-sizing: border-box;  /* Ensures padding doesn't push it out of the box */
+    padding: 12px;
+    margin-bottom: 15px;
+    display: block;          /* Makes them stack properly */
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center;    /* Centers them horizontally */
+    gap: 15px;             /* Adds space between the button and link */
+    margin-top: 20px;
+}
+
+.history-link {
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
+}
+
+.history-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Specific layout for the History Page */
+.history-container {
+    position: relative; /* Removes the absolute 'centering' logic */
+    top: 0;
+    left: 0;
+    transform: none;   /* Cancels the centering transform */
+    margin: 50px auto; /* Adds a gap at the top and centers it horizontally */
+    max-height: 80vh;  /* Limits height so it doesn't hit the bottom of the screen */
+    overflow-y: auto;  /* Adds a scrollbar ONLY if the list is long */
+    padding-top: 20px;
+}
+
+/* Optional: Make the scrollbar look better on dark mode */
+.history-container::-webkit-scrollbar {
+    width: 8px;
+}
+.history-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.error-banner {
+    background-color: rgba(231, 76, 60, 0.2); /* Soft Red */
+    color: #e74c3c;                           /* Bright Red Text */
+    border: 1px solid #e74c3c;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    animation: shake 0.5s; /* Optional: makes the error shake to grab attention */
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+#cityInput {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Shared styles for both buttons */
+.btn-primary {
+    background-color: #4a90e2;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none; /* Removes underline from the link */
+    display: inline-block; /* Allows the link to have padding/height */
+    width: 100%;           /* Keeps them full-width like your screenshot */
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Smooth animation */
+    text-align: center;
+}
+
+/* The cool hover effect for BOTH */
+.btn-primary:hover {
+    background-color: #357abd; 
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.6); 
+    transform: translateY(-2px); 
+}
+
+/* The click effect */
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* This targets the container holding the 5 forecast cards */
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 1px; 
+    margin-top: 20px;
+    margin-bottom: 1px;
+}
+
+.footer-credit {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1); /* See-through glass look */
+    padding: 8px 15px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px); /* Blurs the stars behind it */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    pointer-events: none; /* Makes sure it doesn't block clicks on buttons */
+    z-index: 1000;
+}
+
+.footer-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}

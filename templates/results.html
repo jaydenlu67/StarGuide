@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarGuide - Your Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Stargazing Forecast</h1>
+        <p>Results for <strong>{{ location }}</strong></p>
+
+        <hr style="border: 0.5px solid rgba(255,255,255,0.2); margin: 20px 0;">
+
+        <div class="search-summary" style="margin-bottom: 20px; color: #a0a0a0; font-style: italic;">
+            Viewing conditions for <strong>{{ location }}</strong> 
+            on <strong>{{ search_date }}</strong> at <strong>{{ search_time }}</strong>
+        </div>
+
+        <div class="score-box">
+            <h2 style="font-size: 1.2rem; margin-bottom: 0; color: #4a90e2;">STAR SCORE</h2>
+            <div style="font-size: 5rem; font-weight: bold; color: {{ '#2ecc71' if score > 7 else '#f1c40f' if score > 4 else '#e74c3c' }};">
+                {{ score }}<span style="font-size: 1.5rem; color: #fff;">/10</span>
+            </div>
+        </div>
+
+        <div style="text-align: left; margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+            <p>☁️ <strong>Sky:</strong> {{ condition.capitalize() }}</p>
+            <p>🌙 <strong>Moon:</strong> {{ moon }}</p>
+        </div>
+
+        <div style="text-align: left; margin: 20px 0; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="margin-top: 0; color: #4a90e2; font-size: 1rem;">🔭 WHAT TO LOOK FOR:</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for item in objects %}
+                    <li style="margin-bottom: 8px;">✨ {{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 15px;">📅 5-DAY STARGAZING FORECAST</h3>
+            <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap;">
+                {% for day in forecast %}
+                <div style="background: #2b2e4a; padding: 12px; border-radius: 12px; min-width: 90px; border: 1px solid #3f446e; text-align: center;">
+                    <p style="font-weight: bold; margin: 0; color: #4a90e2;">{{ day.day }}</p>
+                    
+                    <p style="font-size: 1.3rem; margin: 5px 0; font-weight: bold;">{{ day.score }}<span style="font-size: 0.7rem;">/10</span></p>
+                    
+                    <p style="font-size: 0.65rem; margin: 0; opacity: 0.9; color: #f1c40f;">🌙 {{ day.moon }}</p>
+                    <p style="font-size: 0.7rem; margin-top: 5px; font-style: italic;">{{ day.advice }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="forecast-container">
+            {% for day in forecast %}
+                <div class="forecast-card">
+                    </div>
+            {% endfor %}
+        </div>
+        <a href="/home">
+            <a href="/" class="btn-primary">Search Again</a>
+        </a>
+        <hr>
+    </div>
+    <div class="footer-credit">
+        <span>Powered by Jayden Lu</span>
+        <img src="/static/icon.jpg" alt="Jayden's Icon" class="footer-icon">
+    </div>
+</body>
+</html>
