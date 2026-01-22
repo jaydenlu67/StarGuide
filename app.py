@@ -36,7 +36,6 @@ def get_moon_phase(date_str): #this function returns the moon phase based off a 
     else:
         return "Waning Crescent", 25
 
-API_KEY = "6d64e4417f8a0879f78a023ee799c1d7" #api key for weather data
 def get_weather(location, target_date, target_time):
     """
     Searches the 5-day forecast for the 3-hour block closest to 
@@ -192,4 +191,4 @@ def clear_history(): #allows user to wipe their previous searches
     return redirect('/history')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5001)
