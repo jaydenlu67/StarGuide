@@ -39,14 +39,14 @@
     <script>
         const cityInput = document.getElementById('cityInput');
         const dataList = document.getElementById('citySuggestions');
-        const API_KEY = '6d64e4417f8a0879f78a023ee799c1d7'; 
+        const API_KEY = ''; 
 
         cityInput.addEventListener('input', async () => {
             const query = cityInput.value;
             if (query.length < 3) return; // Wait until 3 letters are typed
 
             try {
-                const API_KEY = '6d64e4417f8a0879f78a023ee799c1d7';
+                const API_KEY = '';
                 const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${API_KEY}`);
                 const cities = await response.json();
 

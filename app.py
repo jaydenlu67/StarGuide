@@ -36,6 +36,7 @@ def get_moon_phase(date_str): #this function returns the moon phase based off a 
     else:
         return "Waning Crescent", 25
 
+API_KEY = ""
 def get_weather(location, target_date, target_time):
     """
     Searches the 5-day forecast for the 3-hour block closest to 
